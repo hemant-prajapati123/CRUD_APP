@@ -1,0 +1,30 @@
+{%if user.is_authenticated%}
+<a href="addstudent">add Student</a>
+<a href="showstudent">show Student</a>
+<table align="center" border="1px">
+    {%for i in data%}
+        <tr>
+            <td>{{i.name}}</td>
+            <td>{{i.branch}}</td>
+            <td>{{i.address}}</td>
+            <td><a href="delete?id={{i.id}}">delete</a></td>
+        </tr>
+    {%endfor%}
+</table>
+{%else%}
+<form action="" method="post">
+    {% csrf_token %}
+    USER_NAME<input type="text" name="uname" /><br>
+    PASSWORD<input type="password" name="password" /><br>
+    <input type="submit" value="Login" />
+    </form>
+{%endif%}
+{%if messages%}
+{%for message in messages%}
+<script>
+    {%if message.tags %}
+        alert("{{message}}")
+    {%endif%}
+</script>
+{%endfor%}
+{%endif%}
